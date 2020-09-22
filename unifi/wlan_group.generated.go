@@ -38,7 +38,7 @@ func (c *Client) listWLANGroup(ctx context.Context, site string) ([]WLANGroup, e
 		Data []WLANGroup `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/wlangroup", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/wlangroup", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ func (c *Client) getWLANGroup(ctx context.Context, site, id string) (*WLANGroup,
 		Data []WLANGroup `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/wlangroup/%s", site, id), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/wlangroup/%s", site, id), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (c *Client) getWLANGroup(ctx context.Context, site, id string) (*WLANGroup,
 }
 
 func (c *Client) deleteWLANGroup(ctx context.Context, site, id string) error {
-	err := c.do(ctx, "DELETE", fmt.Sprintf("s/%s/rest/wlangroup/%s", site, id), struct{}{}, nil)
+	err := c.do(ctx, "DELETE", fmt.Sprintf("proxy/network/api/s/%s/rest/wlangroup/%s", site, id), struct{}{}, nil)
 	if err != nil {
 		return err
 	}
@@ -79,7 +79,7 @@ func (c *Client) createWLANGroup(ctx context.Context, site string, d *WLANGroup)
 		Data []WLANGroup `json:"data"`
 	}
 
-	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/rest/wlangroup", site), d, &respBody)
+	err := c.do(ctx, "POST", fmt.Sprintf("proxy/network/api/s/%s/rest/wlangroup", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func (c *Client) updateWLANGroup(ctx context.Context, site string, d *WLANGroup)
 		Data []WLANGroup `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/rest/wlangroup/%s", site, d.ID), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/rest/wlangroup/%s", site, d.ID), d, &respBody)
 	if err != nil {
 		return nil, err
 	}
