@@ -95,6 +95,7 @@ func (c *Client) do(ctx context.Context, method, relativeURL string, reqBody int
 	}
 
 	req.Header.Set("User-Agent", "terraform-provider-unifi/0.1")
+	req.Header.Add("Content-Type", "application/json; charset=utf-8")
 
 	resp, err := c.c.Do(req)
 	if err != nil {
