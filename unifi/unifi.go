@@ -45,7 +45,7 @@ func (c *Client) SetHTTPClient(hc *http.Client) error {
 	return nil
 }
 
-func (c *Client) Login(ctx context.Context, user, pass string) error {
+func (c *Client) Login(ctx context.Context, user, pass string, newpaths bool) error {
 	if c.c == nil {
 		c.c = &http.Client{}
 
@@ -53,21 +53,34 @@ func (c *Client) Login(ctx context.Context, user, pass string) error {
 		c.c.Jar = jar
 	}
 
-	err := c.do(ctx, "POST", "login", &struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
-	}{
-		Username: user,
-		Password: pass,
-	}, nil)
-	if err != nil {
-		return err
+	if newpaths == true {
+		err := c.do(ctx, "POST", "auth/login", &struct {
+			Username string `json:"username"`
+			Password string `json:"password"`
+		}{
+			Username: user,
+			Password: pass,
+		}, nil)
+		if err != nil {
+			return err
+		}
+	} else {
+		err := c.do(ctx, "POST", "login", &struct {
+			Username string `json:"username"`
+			Password string `json:"password"`
+		}{
+			Username: user,
+			Password: pass,
+		}, nil)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
 }
 
-func (c *Client) do(ctx context.Context, method, relativeURL string, reqBody interface{}, respBody interface{}) error {
+func (c *Client) do(ctx context.Context, method, relativeURL string, reqBody interface{}, respBody interface{}, newpaths bool) error {
 	var (
 		reqReader io.Reader
 		err       error
@@ -87,7 +100,13 @@ func (c *Client) do(ctx context.Context, method, relativeURL string, reqBody int
 		return fmt.Errorf("unable to parse URL: %s %s %w", method, relativeURL, err)
 	}
 
-	url := c.baseURL.ResolveReference(reqURL)
+	if newpaths == true {
+		newpath := "proxy/network"
+		newreqURL := newpath.Parse(reqURL)
+		url := c.baseURL.ResolveReference(newreqURL)
+	} else {
+		url := c.baseURL.ResolveReference(reqURL)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, method, url.String(), reqReader)
 	if err != nil {
