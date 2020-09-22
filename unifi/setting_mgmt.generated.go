@@ -49,7 +49,7 @@ func (c *Client) getSettingMgmt(ctx context.Context, site string) (*SettingMgmt,
 		Data []SettingMgmt `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/get/setting/mgmt", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/get/setting/mgmt", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ func (c *Client) updateSettingMgmt(ctx context.Context, site string, d *SettingM
 		Data []SettingMgmt `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/set/setting/mgmt", site), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/set/setting/mgmt", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

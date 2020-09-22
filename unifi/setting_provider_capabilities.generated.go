@@ -36,7 +36,7 @@ func (c *Client) getSettingProviderCapabilities(ctx context.Context, site string
 		Data []SettingProviderCapabilities `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/get/setting/provider_capabilities", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/get/setting/provider_capabilities", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (c *Client) updateSettingProviderCapabilities(ctx context.Context, site str
 		Data []SettingProviderCapabilities `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/set/setting/provider_capabilities", site), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/set/setting/provider_capabilities", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

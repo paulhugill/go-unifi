@@ -39,7 +39,7 @@ func (c *Client) getSettingBroadcast(ctx context.Context, site string) (*Setting
 		Data []SettingBroadcast `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/get/setting/broadcast", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/get/setting/broadcast", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (c *Client) updateSettingBroadcast(ctx context.Context, site string, d *Set
 		Data []SettingBroadcast `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/set/setting/broadcast", site), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/set/setting/broadcast", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

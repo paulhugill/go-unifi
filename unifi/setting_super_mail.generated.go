@@ -34,7 +34,7 @@ func (c *Client) getSettingSuperMail(ctx context.Context, site string) (*Setting
 		Data []SettingSuperMail `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/get/setting/super_mail", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/get/setting/super_mail", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func (c *Client) updateSettingSuperMail(ctx context.Context, site string, d *Set
 		Data []SettingSuperMail `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/set/setting/super_mail", site), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/set/setting/super_mail", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

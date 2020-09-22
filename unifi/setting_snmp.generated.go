@@ -38,7 +38,7 @@ func (c *Client) getSettingSnmp(ctx context.Context, site string) (*SettingSnmp,
 		Data []SettingSnmp `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/get/setting/snmp", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/get/setting/snmp", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (c *Client) updateSettingSnmp(ctx context.Context, site string, d *SettingS
 		Data []SettingSnmp `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/set/setting/snmp", site), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/set/setting/snmp", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

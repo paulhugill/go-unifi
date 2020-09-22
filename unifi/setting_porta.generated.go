@@ -34,7 +34,7 @@ func (c *Client) getSettingPorta(ctx context.Context, site string) (*SettingPort
 		Data []SettingPorta `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/get/setting/porta", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/get/setting/porta", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func (c *Client) updateSettingPorta(ctx context.Context, site string, d *Setting
 		Data []SettingPorta `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/set/setting/porta", site), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/set/setting/porta", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

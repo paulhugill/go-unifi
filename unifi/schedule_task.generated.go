@@ -45,7 +45,7 @@ func (c *Client) listScheduleTask(ctx context.Context, site string) ([]ScheduleT
 		Data []ScheduleTask `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/scheduletask", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/scheduletask", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (c *Client) getScheduleTask(ctx context.Context, site, id string) (*Schedul
 		Data []ScheduleTask `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/scheduletask/%s", site, id), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/scheduletask/%s", site, id), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +73,7 @@ func (c *Client) getScheduleTask(ctx context.Context, site, id string) (*Schedul
 }
 
 func (c *Client) deleteScheduleTask(ctx context.Context, site, id string) error {
-	err := c.do(ctx, "DELETE", fmt.Sprintf("s/%s/rest/scheduletask/%s", site, id), struct{}{}, nil)
+	err := c.do(ctx, "DELETE", fmt.Sprintf("proxy/network/api/s/%s/rest/scheduletask/%s", site, id), struct{}{}, nil)
 	if err != nil {
 		return err
 	}
@@ -86,7 +86,7 @@ func (c *Client) createScheduleTask(ctx context.Context, site string, d *Schedul
 		Data []ScheduleTask `json:"data"`
 	}
 
-	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/rest/scheduletask", site), d, &respBody)
+	err := c.do(ctx, "POST", fmt.Sprintf("proxy/network/api/s/%s/rest/scheduletask", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ func (c *Client) updateScheduleTask(ctx context.Context, site string, d *Schedul
 		Data []ScheduleTask `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/rest/scheduletask/%s", site, d.ID), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/rest/scheduletask/%s", site, d.ID), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

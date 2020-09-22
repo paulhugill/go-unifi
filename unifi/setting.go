@@ -85,7 +85,7 @@ func (c *Client) GetSetting(ctx context.Context, site, key string) (*Setting, in
 		Data []json.RawMessage `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/get/setting", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/get/setting", site), nil, &respBody)
 	if err != nil {
 		return nil, nil, err
 	}

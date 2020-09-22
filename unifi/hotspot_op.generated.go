@@ -34,7 +34,7 @@ func (c *Client) listHotspotOp(ctx context.Context, site string) ([]HotspotOp, e
 		Data []HotspotOp `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/hotspotop", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/hotspotop", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c *Client) getHotspotOp(ctx context.Context, site, id string) (*HotspotOp,
 		Data []HotspotOp `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/hotspotop/%s", site, id), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/hotspotop/%s", site, id), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func (c *Client) getHotspotOp(ctx context.Context, site, id string) (*HotspotOp,
 }
 
 func (c *Client) deleteHotspotOp(ctx context.Context, site, id string) error {
-	err := c.do(ctx, "DELETE", fmt.Sprintf("s/%s/rest/hotspotop/%s", site, id), struct{}{}, nil)
+	err := c.do(ctx, "DELETE", fmt.Sprintf("proxy/network/api/s/%s/rest/hotspotop/%s", site, id), struct{}{}, nil)
 	if err != nil {
 		return err
 	}
@@ -75,7 +75,7 @@ func (c *Client) createHotspotOp(ctx context.Context, site string, d *HotspotOp)
 		Data []HotspotOp `json:"data"`
 	}
 
-	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/rest/hotspotop", site), d, &respBody)
+	err := c.do(ctx, "POST", fmt.Sprintf("proxy/network/api/s/%s/rest/hotspotop", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ func (c *Client) updateHotspotOp(ctx context.Context, site string, d *HotspotOp)
 		Data []HotspotOp `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/rest/hotspotop/%s", site, d.ID), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/rest/hotspotop/%s", site, d.ID), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

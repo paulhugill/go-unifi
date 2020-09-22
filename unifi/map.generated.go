@@ -44,7 +44,7 @@ func (c *Client) listMap(ctx context.Context, site string) ([]Map, error) {
 		Data []Map `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/map", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/map", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (c *Client) getMap(ctx context.Context, site, id string) (*Map, error) {
 		Data []Map `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/map/%s", site, id), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/map/%s", site, id), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +72,7 @@ func (c *Client) getMap(ctx context.Context, site, id string) (*Map, error) {
 }
 
 func (c *Client) deleteMap(ctx context.Context, site, id string) error {
-	err := c.do(ctx, "DELETE", fmt.Sprintf("s/%s/rest/map/%s", site, id), struct{}{}, nil)
+	err := c.do(ctx, "DELETE", fmt.Sprintf("proxy/network/api/s/%s/rest/map/%s", site, id), struct{}{}, nil)
 	if err != nil {
 		return err
 	}
@@ -85,7 +85,7 @@ func (c *Client) createMap(ctx context.Context, site string, d *Map) (*Map, erro
 		Data []Map `json:"data"`
 	}
 
-	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/rest/map", site), d, &respBody)
+	err := c.do(ctx, "POST", fmt.Sprintf("proxy/network/api/s/%s/rest/map", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ func (c *Client) updateMap(ctx context.Context, site string, d *Map) (*Map, erro
 		Data []Map `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/rest/map/%s", site, d.ID), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/rest/map/%s", site, d.ID), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

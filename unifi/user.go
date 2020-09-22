@@ -14,7 +14,7 @@ func (c *Client) GetUserByMAC(ctx context.Context, site, mac string) (*User, err
 		Data []User `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/stat/user/%s", site, mac), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/stat/user/%s", site, mac), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c *Client) CreateUser(ctx context.Context, site string, d *User) (*User, e
 		} `json:"data"`
 	}
 
-	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/group/user", site), reqBody, &respBody)
+	err := c.do(ctx, "POST", fmt.Sprintf("proxy/network/api/s/%s/group/user", site), reqBody, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func (c *Client) stamgr(ctx context.Context, site, cmd string, data map[string]i
 		Data []User `json:"data"`
 	}
 
-	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/cmd/stamgr", site), reqBody, &respBody)
+	err := c.do(ctx, "POST", fmt.Sprintf("proxy/network/api/s/%s/cmd/stamgr", site), reqBody, &respBody)
 	if err != nil {
 		return nil, err
 	}

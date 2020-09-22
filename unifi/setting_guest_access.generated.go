@@ -121,7 +121,7 @@ func (c *Client) getSettingGuestAccess(ctx context.Context, site string) (*Setti
 		Data []SettingGuestAccess `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/get/setting/guest_access", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/get/setting/guest_access", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +140,7 @@ func (c *Client) updateSettingGuestAccess(ctx context.Context, site string, d *S
 		Data []SettingGuestAccess `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/set/setting/guest_access", site), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/set/setting/guest_access", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

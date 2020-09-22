@@ -39,7 +39,7 @@ func (c *Client) listDynamicDNS(ctx context.Context, site string) ([]DynamicDNS,
 		Data []DynamicDNS `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/dynamicdns", site), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/dynamicdns", site), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func (c *Client) getDynamicDNS(ctx context.Context, site, id string) (*DynamicDN
 		Data []DynamicDNS `json:"data"`
 	}
 
-	err := c.do(ctx, "GET", fmt.Sprintf("s/%s/rest/dynamicdns/%s", site, id), nil, &respBody)
+	err := c.do(ctx, "GET", fmt.Sprintf("proxy/network/api/s/%s/rest/dynamicdns/%s", site, id), nil, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ func (c *Client) getDynamicDNS(ctx context.Context, site, id string) (*DynamicDN
 }
 
 func (c *Client) deleteDynamicDNS(ctx context.Context, site, id string) error {
-	err := c.do(ctx, "DELETE", fmt.Sprintf("s/%s/rest/dynamicdns/%s", site, id), struct{}{}, nil)
+	err := c.do(ctx, "DELETE", fmt.Sprintf("proxy/network/api/s/%s/rest/dynamicdns/%s", site, id), struct{}{}, nil)
 	if err != nil {
 		return err
 	}
@@ -80,7 +80,7 @@ func (c *Client) createDynamicDNS(ctx context.Context, site string, d *DynamicDN
 		Data []DynamicDNS `json:"data"`
 	}
 
-	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/rest/dynamicdns", site), d, &respBody)
+	err := c.do(ctx, "POST", fmt.Sprintf("proxy/network/api/s/%s/rest/dynamicdns", site), d, &respBody)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func (c *Client) updateDynamicDNS(ctx context.Context, site string, d *DynamicDN
 		Data []DynamicDNS `json:"data"`
 	}
 
-	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/rest/dynamicdns/%s", site, d.ID), d, &respBody)
+	err := c.do(ctx, "PUT", fmt.Sprintf("proxy/network/api/s/%s/rest/dynamicdns/%s", site, d.ID), d, &respBody)
 	if err != nil {
 		return nil, err
 	}

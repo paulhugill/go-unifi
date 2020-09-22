@@ -29,7 +29,7 @@ func (dst *Network) UnmarshalJSON(b []byte) error {
 }
 
 func (c *Client) DeleteNetwork(ctx context.Context, site, id, name string) error {
-	err := c.do(ctx, "DELETE", fmt.Sprintf("s/%s/rest/networkconf/%s", site, id), struct {
+	err := c.do(ctx, "DELETE", fmt.Sprintf("proxy/network/api/s/%s/rest/networkconf/%s", site, id), struct {
 		Name string `json:"name"`
 	}{
 		Name: name,
