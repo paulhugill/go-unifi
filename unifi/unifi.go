@@ -43,6 +43,7 @@ type Client struct {
 
 	apiPath   string
 	loginPath string
+	csrf  string
 }
 
 func (c *Client) SetBaseURL(base string) error {
@@ -162,12 +163,17 @@ func (c *Client) do(ctx context.Context, method, relativeURL string, reqBody int
 
 	req.Header.Set("User-Agent", "terraform-provider-unifi/0.1")
 	req.Header.Add("Content-Type", "application/json; charset=utf-8")
+	req.Header.Add("X-CSRF-Token", c.csrf)
 
 	resp, err := c.c.Do(req)
 	if err != nil {
 		return fmt.Errorf("unable to perform request: %s %s %w", method, relativeURL, err)
 	}
 	defer resp.Body.Close()
+
+	if csrf := resp.Header.Get("x-csrf-token"); csrf != "" {
+		c.csrf = resp.Header.Get("x-csrf-token")
+	}
 
 	if resp.StatusCode == http.StatusNotFound {
 		return &NotFoundError{}
